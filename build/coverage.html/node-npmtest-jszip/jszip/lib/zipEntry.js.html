@@ -1,0 +1,1103 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-jszip/jszip/lib/zipEntry.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-jszip">npmtest-jszip (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-jszip/jszip/lib/zipEntry.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">11.11% <small>(13 / 117)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 54)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 12)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">11.11% <small>(13 / 117)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-jszip/jszip/lib/</a> &#187; zipEntry.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+var readerFor = require('./reader/readerFor');
+var utils = require('./utils');
+var CompressedObject = require('./compressedObject');
+var crc32fn = require('./crc32');
+var utf8 = require('./utf8');
+var compressions = require('./compressions');
+var support = require('./support');
+&nbsp;
+var MADE_BY_DOS = 0x00;
+var MADE_BY_UNIX = 0x03;
+&nbsp;
+/**
+ * Find a compression registered in JSZip.
+ * @param {string} compressionMethod the method magic to find.
+ * @return {Object|null} the JSZip compression object, null if none found.
+ */
+var findCompression = <span class="fstat-no" title="function not covered" >function(compressionMethod) {</span>
+<span class="cstat-no" title="statement not covered" >    for (var method in compressions) {</span>
+<span class="cstat-no" title="statement not covered" >        if (!compressions.hasOwnProperty(method)) {</span>
+<span class="cstat-no" title="statement not covered" >            continue;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (compressions[method].magic === compressionMethod) {</span>
+<span class="cstat-no" title="statement not covered" >            return compressions[method];</span>
+        }
+    }
+<span class="cstat-no" title="statement not covered" >    return null;</span>
+};
+&nbsp;
+// class ZipEntry {{{
+/**
+ * An entry in the zip file.
+ * @constructor
+ * @param {Object} options Options of the current file.
+ * @param {Object} loadOptions Options for loading the stream.
+ */
+<span class="fstat-no" title="function not covered" >function ZipEntry(options, loadOptions) {</span>
+<span class="cstat-no" title="statement not covered" >    this.options = options;</span>
+<span class="cstat-no" title="statement not covered" >    this.loadOptions = loadOptions;</span>
+}
+ZipEntry.prototype = {
+    /**
+     * say if the file is encrypted.
+     * @return {boolean} true if the file is encrypted, false otherwise.
+     */
+    isEncrypted: <span class="fstat-no" title="function not covered" >function() {</span>
+        // bit 1 is set
+<span class="cstat-no" title="statement not covered" >        return (this.bitFlag &amp; 0x0001) === 0x0001;</span>
+    },
+    /**
+     * say if the file has utf-8 filename/comment.
+     * @return {boolean} true if the filename/comment is in utf-8, false otherwise.
+     */
+    useUTF8: <span class="fstat-no" title="function not covered" >function() {</span>
+        // bit 11 is set
+<span class="cstat-no" title="statement not covered" >        return (this.bitFlag &amp; 0x0800) === 0x0800;</span>
+    },
+    /**
+     * Read the local part of a zip file and add the info in this object.
+     * @param {DataReader} reader the reader to use.
+     */
+    readLocalPart: <span class="fstat-no" title="function not covered" >function(reader) {</span>
+<span class="cstat-no" title="statement not covered" >        var compression, localExtraFieldsLength;</span>
+&nbsp;
+        // we already know everything from the central dir !
+        // If the central dir data are false, we are doomed.
+        // On the bright side, the local part is scary  : zip64, data descriptors, both, etc.
+        // The less data we get here, the more reliable this should be.
+        // Let's skip the whole header and dash to the data !
+<span class="cstat-no" title="statement not covered" >        reader.skip(22);</span>
+        // in some zip created on windows, the filename stored in the central dir contains \ instead of /.
+        // Strangely, the filename here is OK.
+        // I would love to treat these zip files as corrupted (see http://www.info-zip.org/FAQ.html#backslashes
+        // or APPNOTE#4.4.17.1, "All slashes MUST be forward slashes '/'") but there are a lot of bad zip generators...
+        // Search "unzip mismatching "local" filename continuing with "central" filename version" on
+        // the internet.
+        //
+        // I think I see the logic here : the central directory is used to display
+        // content and the local directory is used to extract the files. Mixing / and \
+        // may be used to display \ to windows users and use / when extracting the files.
+        // Unfortunately, this lead also to some issues : http://seclists.org/fulldisclosure/2009/Sep/394
+<span class="cstat-no" title="statement not covered" >        this.fileNameLength = reader.readInt(2);</span>
+<span class="cstat-no" title="statement not covered" >        localExtraFieldsLength = reader.readInt(2); </span>// can't be sure this will be the same as the central dir
+        // the fileName is stored as binary data, the handleUTF8 method will take care of the encoding.
+<span class="cstat-no" title="statement not covered" >        this.fileName = reader.readData(this.fileNameLength);</span>
+<span class="cstat-no" title="statement not covered" >        reader.skip(localExtraFieldsLength);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (this.compressedSize === -1 || this.uncompressedSize === -1) {</span>
+<span class="cstat-no" title="statement not covered" >            throw new Error("Bug or corrupted zip : didn't get enough informations from the central directory " + "(compressedSize === -1 || uncompressedSize === -1)");</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        compression = findCompression(this.compressionMethod);</span>
+<span class="cstat-no" title="statement not covered" >        if (compression === null) { // no compression found</span>
+<span class="cstat-no" title="statement not covered" >            throw new Error("Corrupted zip : compression " + utils.pretty(this.compressionMethod) + " unknown (inner file : " + utils.transformTo("string", this.fileName) + ")");</span>
+        }
+<span class="cstat-no" title="statement not covered" >        this.decompressed = new CompressedObject(this.compressedSize, this.uncompressedSize, this.crc32, compression, reader.readData(this.compressedSize));</span>
+    },
+&nbsp;
+    /**
+     * Read the central part of a zip file and add the info in this object.
+     * @param {DataReader} reader the reader to use.
+     */
+    readCentralPart: <span class="fstat-no" title="function not covered" >function(reader) {</span>
+<span class="cstat-no" title="statement not covered" >        this.versionMadeBy = reader.readInt(2);</span>
+<span class="cstat-no" title="statement not covered" >        reader.skip(2);</span>
+        // this.versionNeeded = reader.readInt(2);
+<span class="cstat-no" title="statement not covered" >        this.bitFlag = reader.readInt(2);</span>
+<span class="cstat-no" title="statement not covered" >        this.compressionMethod = reader.readString(2);</span>
+<span class="cstat-no" title="statement not covered" >        this.date = reader.readDate();</span>
+<span class="cstat-no" title="statement not covered" >        this.crc32 = reader.readInt(4);</span>
+<span class="cstat-no" title="statement not covered" >        this.compressedSize = reader.readInt(4);</span>
+<span class="cstat-no" title="statement not covered" >        this.uncompressedSize = reader.readInt(4);</span>
+<span class="cstat-no" title="statement not covered" >        var fileNameLength = reader.readInt(2);</span>
+<span class="cstat-no" title="statement not covered" >        this.extraFieldsLength = reader.readInt(2);</span>
+<span class="cstat-no" title="statement not covered" >        this.fileCommentLength = reader.readInt(2);</span>
+<span class="cstat-no" title="statement not covered" >        this.diskNumberStart = reader.readInt(2);</span>
+<span class="cstat-no" title="statement not covered" >        this.internalFileAttributes = reader.readInt(2);</span>
+<span class="cstat-no" title="statement not covered" >        this.externalFileAttributes = reader.readInt(4);</span>
+<span class="cstat-no" title="statement not covered" >        this.localHeaderOffset = reader.readInt(4);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (this.isEncrypted()) {</span>
+<span class="cstat-no" title="statement not covered" >            throw new Error("Encrypted zip are not supported");</span>
+        }
+&nbsp;
+        // will be read in the local part, see the comments there
+<span class="cstat-no" title="statement not covered" >        reader.skip(fileNameLength);</span>
+<span class="cstat-no" title="statement not covered" >        this.readExtraFields(reader);</span>
+<span class="cstat-no" title="statement not covered" >        this.parseZIP64ExtraField(reader);</span>
+<span class="cstat-no" title="statement not covered" >        this.fileComment = reader.readData(this.fileCommentLength);</span>
+    },
+&nbsp;
+    /**
+     * Parse the external file attributes and get the unix/dos permissions.
+     */
+    processAttributes: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        this.unixPermissions = null;</span>
+<span class="cstat-no" title="statement not covered" >        this.dosPermissions = null;</span>
+<span class="cstat-no" title="statement not covered" >        var madeBy = this.versionMadeBy &gt;&gt; 8;</span>
+&nbsp;
+        // Check if we have the DOS directory flag set.
+        // We look for it in the DOS and UNIX permissions
+        // but some unknown platform could set it as a compatibility flag.
+<span class="cstat-no" title="statement not covered" >        this.dir = this.externalFileAttributes &amp; 0x0010 ? true : false;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if(madeBy === MADE_BY_DOS) {</span>
+            // first 6 bits (0 to 5)
+<span class="cstat-no" title="statement not covered" >            this.dosPermissions = this.externalFileAttributes &amp; 0x3F;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if(madeBy === MADE_BY_UNIX) {</span>
+<span class="cstat-no" title="statement not covered" >            this.unixPermissions = (this.externalFileAttributes &gt;&gt; 16) &amp; 0xFFFF;</span>
+            // the octal permissions are in (this.unixPermissions &amp; 0x01FF).toString(8);
+        }
+&nbsp;
+        // fail safe : if the name ends with a / it probably means a folder
+<span class="cstat-no" title="statement not covered" >        if (!this.dir &amp;&amp; this.fileNameStr.slice(-1) === '/') {</span>
+<span class="cstat-no" title="statement not covered" >            this.dir = true;</span>
+        }
+    },
+&nbsp;
+    /**
+     * Parse the ZIP64 extra field and merge the info in the current ZipEntry.
+     * @param {DataReader} reader the reader to use.
+     */
+    parseZIP64ExtraField: <span class="fstat-no" title="function not covered" >function(reader) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (!this.extraFields[0x0001]) {</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
+        }
+&nbsp;
+        // should be something, preparing the extra reader
+<span class="cstat-no" title="statement not covered" >        var extraReader = readerFor(this.extraFields[0x0001].value);</span>
+&nbsp;
+        // I really hope that these 64bits integer can fit in 32 bits integer, because js
+        // won't let us have more.
+<span class="cstat-no" title="statement not covered" >        if (this.uncompressedSize === utils.MAX_VALUE_32BITS) {</span>
+<span class="cstat-no" title="statement not covered" >            this.uncompressedSize = extraReader.readInt(8);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (this.compressedSize === utils.MAX_VALUE_32BITS) {</span>
+<span class="cstat-no" title="statement not covered" >            this.compressedSize = extraReader.readInt(8);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (this.localHeaderOffset === utils.MAX_VALUE_32BITS) {</span>
+<span class="cstat-no" title="statement not covered" >            this.localHeaderOffset = extraReader.readInt(8);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (this.diskNumberStart === utils.MAX_VALUE_32BITS) {</span>
+<span class="cstat-no" title="statement not covered" >            this.diskNumberStart = extraReader.readInt(4);</span>
+        }
+    },
+    /**
+     * Read the central part of a zip file and add the info in this object.
+     * @param {DataReader} reader the reader to use.
+     */
+    readExtraFields: <span class="fstat-no" title="function not covered" >function(reader) {</span>
+<span class="cstat-no" title="statement not covered" >        var end = reader.index + this.extraFieldsLength,</span>
+            extraFieldId,
+            extraFieldLength,
+            extraFieldValue;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (!this.extraFields) {</span>
+<span class="cstat-no" title="statement not covered" >            this.extraFields = {};</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        while (reader.index &lt; end) {</span>
+<span class="cstat-no" title="statement not covered" >            extraFieldId = reader.readInt(2);</span>
+<span class="cstat-no" title="statement not covered" >            extraFieldLength = reader.readInt(2);</span>
+<span class="cstat-no" title="statement not covered" >            extraFieldValue = reader.readData(extraFieldLength);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            this.extraFields[extraFieldId] = {</span>
+                id: extraFieldId,
+                length: extraFieldLength,
+                value: extraFieldValue
+            };
+        }
+    },
+    /**
+     * Apply an UTF8 transformation if needed.
+     */
+    handleUTF8: <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >        var decodeParamType = support.uint8array ? "uint8array" : "array";</span>
+<span class="cstat-no" title="statement not covered" >        if (this.useUTF8()) {</span>
+<span class="cstat-no" title="statement not covered" >            this.fileNameStr = utf8.utf8decode(this.fileName);</span>
+<span class="cstat-no" title="statement not covered" >            this.fileCommentStr = utf8.utf8decode(this.fileComment);</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            var upath = this.findExtraFieldUnicodePath();</span>
+<span class="cstat-no" title="statement not covered" >            if (upath !== null) {</span>
+<span class="cstat-no" title="statement not covered" >                this.fileNameStr = upath;</span>
+            } else {
+                // ASCII text or unsupported code page
+<span class="cstat-no" title="statement not covered" >                var fileNameByteArray =  utils.transformTo(decodeParamType, this.fileName);</span>
+<span class="cstat-no" title="statement not covered" >                this.fileNameStr = this.loadOptions.decodeFileName(fileNameByteArray);</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            var ucomment = this.findExtraFieldUnicodeComment();</span>
+<span class="cstat-no" title="statement not covered" >            if (ucomment !== null) {</span>
+<span class="cstat-no" title="statement not covered" >                this.fileCommentStr = ucomment;</span>
+            } else {
+                // ASCII text or unsupported code page
+<span class="cstat-no" title="statement not covered" >                var commentByteArray =  utils.transformTo(decodeParamType, this.fileComment);</span>
+<span class="cstat-no" title="statement not covered" >                this.fileCommentStr = this.loadOptions.decodeFileName(commentByteArray);</span>
+            }
+        }
+    },
+&nbsp;
+    /**
+     * Find the unicode path declared in the extra field, if any.
+     * @return {String} the unicode path, null otherwise.
+     */
+    findExtraFieldUnicodePath: <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >        var upathField = this.extraFields[0x7075];</span>
+<span class="cstat-no" title="statement not covered" >        if (upathField) {</span>
+<span class="cstat-no" title="statement not covered" >            var extraReader = readerFor(upathField.value);</span>
+&nbsp;
+            // wrong version
+<span class="cstat-no" title="statement not covered" >            if (extraReader.readInt(1) !== 1) {</span>
+<span class="cstat-no" title="statement not covered" >                return null;</span>
+            }
+&nbsp;
+            // the crc of the filename changed, this field is out of date.
+<span class="cstat-no" title="statement not covered" >            if (crc32fn(this.fileName) !== extraReader.readInt(4)) {</span>
+<span class="cstat-no" title="statement not covered" >                return null;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return utf8.utf8decode(extraReader.readData(upathField.length - 5));</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return null;</span>
+    },
+&nbsp;
+    /**
+     * Find the unicode comment declared in the extra field, if any.
+     * @return {String} the unicode comment, null otherwise.
+     */
+    findExtraFieldUnicodeComment: <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >        var ucommentField = this.extraFields[0x6375];</span>
+<span class="cstat-no" title="statement not covered" >        if (ucommentField) {</span>
+<span class="cstat-no" title="statement not covered" >            var extraReader = readerFor(ucommentField.value);</span>
+&nbsp;
+            // wrong version
+<span class="cstat-no" title="statement not covered" >            if (extraReader.readInt(1) !== 1) {</span>
+<span class="cstat-no" title="statement not covered" >                return null;</span>
+            }
+&nbsp;
+            // the crc of the comment changed, this field is out of date.
+<span class="cstat-no" title="statement not covered" >            if (crc32fn(this.fileComment) !== extraReader.readInt(4)) {</span>
+<span class="cstat-no" title="statement not covered" >                return null;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return utf8.utf8decode(extraReader.readData(ucommentField.length - 5));</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return null;</span>
+    }
+};
+module.exports = ZipEntry;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 17:47:52 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
